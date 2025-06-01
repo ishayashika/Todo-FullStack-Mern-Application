@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsArrowLeftShort } from "react-icons/bs";
 import axios from 'axios';
 import toast from "react-hot-toast";
-import classes from "./Profile.module.scss";
+import classes from "./Profile.module.css";
 
 const ProfileForm = () => {
 const [user, setUser] = useState({
@@ -88,4 +88,4 @@ const updateUserInfo = (e)=>{
   );
 };
 
-export default ProfileForm;
+export default ProfileForm; 

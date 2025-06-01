@@ -1,3 +1,4 @@
+//controllers are functions that handle the business logic for a specific route. Instead of writing the logic directly inside the route, you separate it into controller functions. This makes your code cleaner, modular, and easier to test and maintain.
 import User from "../models/user.js"
 /* @strategies(getUserInfo)
     we want user Id we will get user data by user Id from where we can get our user id/or Data go utlis/cheack auth you will get at line No. 13 from where we've to collect if you go in routes/main.js befour to go to userRoute it will authenticate 

@@ -15,13 +15,13 @@ export const register = async (req, res,next) => {
   /*cheack user Already exit or not */
   const exitOrNot = await User.findOne({ email });
   if (exitOrNot) {
-    res.status(401).send("user already exits");
+    return res.status(401).send("user already exits");
   }
 
   try {
     /*encrypt the password */
-    const salt = await bcrypthjs.genSalt(10);
-    const hashPassword = await bcrypthjs.hash(password, salt);
+    const salt = await bcrypthjs.genSalt(10);//generate a salt is a method provided by bcryptjs that generates a random string to be used as a salt for hashing passwords.
+    const hashPassword = await bcrypthjs.hash(password, salt);//Salt is a random string that is added to a password before it's hashed.
 
     /* MongoDB Architecture
          save to DB and send a key(token) ||create new entrey in DB*/
@@ -32,7 +32,7 @@ export const register = async (req, res,next) => {
       password: hashPassword,
     });
     await newUser.save();
-    newUser.password = undefined;
+    newUser.password = undefined;//To remove the password field from the user object before returning it to the frontend, so you don’t accidentally expose the hashed password in the API response.
     return res.status(201).json({
       success: true,
       message: "user successfully add",
@@ -47,6 +47,9 @@ export const register = async (req, res,next) => {
 export const login = async (req, res, next) => {
   /*collect all info from from fronted side */
   const { email, password } = req.body;
+  
+  console.log("Login attempt with email:", email);
+  
   /*validate all info */
   if (!(email && password)) {
     // res.status(401).send("both field are required");
@@ -54,9 +57,17 @@ export const login = async (req, res, next) => {
   }
   try {
     /*cheack if already in DB or not */
+    console.log("Searching for user with email:", email);
+    
+    // First check if we can find any users at all
+    const allUsers = await User.find({}).select("email");
+    console.log("All users in DB:", allUsers.map(u => u.email));
+    
     const user = await User.findOne({ email }).select("name email password");
+    console.log("User found?", !!user);
+    
     if (!user) {
-     return next(createError({status:404, message:"user not found"}))
+      return next(createError({status:404, message:"user not found"}))
     }
     /* cheack password is correct or not */
     const isPasswordcorrect = await bcrypthjs.compare(password, user.password);

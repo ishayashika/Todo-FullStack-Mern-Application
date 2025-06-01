@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import classes from "./Navbar.module.scss";
+import classes from "./Navbar.module.css";
 import { FaUserAlt } from "react-icons/fa";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+    // Function to fetch user info from the backend (when the component mounts)
   const getUserInfo = async () => {
     try {
       const { data } = await axios.get("/api/users/me");
@@ -17,10 +18,10 @@ const Navbar = () => {
       console.log(error);
     }
   };
-
+//fucntion to handle user logout
   const handleLogout = async () => {
     try {
-      await axios.get("/api/auth/logout");
+      await axios.get("/api/auth/logout");// Sending logout request to the server
       setUser(null);
       toast.success("Logout Successfully");
       navigate("/auth");
@@ -43,9 +44,6 @@ const Navbar = () => {
         <div>
           <h1 className={classes.name}>{user.name}</h1>
           <p className={classes.email}>{user.email}</p>
-          <Link to='/edit' className={classes.editBtn}>
-            Edit
-          </Link>
         </div>
       </div>
       <nav>
@@ -57,4 +55,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar; 

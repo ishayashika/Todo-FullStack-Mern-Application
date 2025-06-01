@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskEdit from '../components/Profile/Edit'
+import TaskEdit from '../components/Profile/Edit.jsx'
 
 
 const Edit = () => {
@@ -10,4 +10,4 @@ const Edit = () => {
   )
 }
 
-export default Edit
+export default Edit 

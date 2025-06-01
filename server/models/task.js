@@ -13,6 +13,15 @@ const taskSchema = new Schema({
     default: false,
     /*?false: whenevr we crete new task we creat with only name so do not want pass this completed */
   },
+  status: {
+    type: String,
+    enum: ['pending', 'in-progress', 'completed'],
+    default: 'pending',
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

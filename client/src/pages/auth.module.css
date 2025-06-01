@@ -1,0 +1,23 @@
+.auth_page {
+  width: 100%;
+  min-height: 100vh;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_container {
+  display: flex;
+  gap: 2rem;
+  background: transparent;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .form_container {
+    flex-direction: column;
+  }
+} 

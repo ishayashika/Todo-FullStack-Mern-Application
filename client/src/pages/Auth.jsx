@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import Layout from '../components/Layout/Layout'
-import Login from "../components/Auth/Login";
-import classes from "./auth.module.scss"
+import Login from "../components/Auth/Login.jsx";
+import classes from "./auth.module.css"
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 
@@ -18,12 +17,12 @@ if(auth){
 },[auth, navigate])
 
   return (  
-    <Layout>
+    <div className={classes.auth_page}>
       <div className={classes.form_container}>
         <Login/>
       </div>
-    </Layout>
+    </div>
   )
 }
 
-export default Auth
+export default Auth 

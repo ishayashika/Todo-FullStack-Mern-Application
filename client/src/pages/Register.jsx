@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import Layout from '../components/Layout/Layout'
-import Register from "../components/Auth/Register";
-import classes from "./auth.module.scss"
+import Register from "../components/Auth/Register.jsx";
+import classes from "./auth.module.css"
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 
@@ -18,11 +17,11 @@ if(auth){
 },[auth, navigate])
 
   return (  
-    <Layout>
+    <div className={classes.auth_page}>
       <div className={classes.form_container}>
         <Register/>
       </div>
-    </Layout>
+    </div>
   )
 }
 

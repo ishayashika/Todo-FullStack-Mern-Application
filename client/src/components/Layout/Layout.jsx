@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from "./Layout.module.scss";
+import classes from "./Layout.module.css";
 
 const Layout = ({children}) => {
   return (
@@ -7,4 +7,4 @@ const Layout = ({children}) => {
   )
 }
 
-export default Layout
+export default Layout 

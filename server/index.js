@@ -8,9 +8,22 @@ import allRoutes from "./routes/main.js"
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
 /* Middleware */
 
-app.use(cors()); //helps us to share our info between clients
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:5174'
+  ],
+  credentials: true
+})); //helps us to share our info between clients
 app.use(morgan('tiny')); //whenever we hit any kind of route it will actually login our terminal
 app.use(cookieParser()); 
 app.use(express.json());//it will enable our abality to work with json
@@ -29,20 +42,16 @@ app.use((err, _req, res, next) => {
   return res.status(status).json({ message, stack: err.stack });
 });
 
+mongoose.set('strictQuery', false);
 
-
-const connectDB = async () => {
-    try {
-      await mongoose.connect(process.env.DB_LOCALHOST_CONN);
-      console.log('MongoDB Connected');
-    } catch (err) {
-      console.log(err);
-      process.exit(1);
-    }
-  };
+mongoose.connect(process.env.MONGO_URI)
+.then(res=>{
+  console.log("Connected to MongoDB successfully")
+}).catch(err=>{
+  console.log("Error connecting to MongoDB",err);
+})
 
 
 app.listen(PORT, () => {
-    connectDB();
     console.log(`Server is running on port http://localhost:${PORT}`);
 });

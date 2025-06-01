@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import classes from "./Profile.module.scss";
+import classes from "./Profile.module.css";
 import axios from "axios";
-
-
 
 const Edit = () => {
   // const navigate = useNavigate();
@@ -50,4 +48,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default Edit; 
