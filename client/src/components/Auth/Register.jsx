@@ -113,20 +113,34 @@ const Register = () => {
     }
     
     try {
-      const { data } = await axios.post("/api/auth/register", {
-        name: inputs.name,
-        email: inputs.email,
-        password: inputs.password,
-      });
+      const { data } = await axios.post(
+  "https://todo-fullstack-mern-application-server.onrender.com/api/auth/register",
+  {
+    name: inputs.name,
+    email: inputs.email,
+    password: inputs.password,
+  },
+  {
+    withCredentials: true,
+  }
+);
+
 
       if (data.success) {
         toast.success("User Registered Successfully");
         // Log the user in automatically after registration
         try {
-          const loginResponse = await axios.post("/api/auth/login", {
-            email: inputs.email,
-            password: inputs.password,
-          });
+          const loginResponse = await axios.post(
+  "https://todo-fullstack-mern-application-server.onrender.com/api/auth/login",
+  {
+    email: inputs.email,
+    password: inputs.password,
+  },
+  {
+    withCredentials: true,
+  }
+);
+
           if (loginResponse.data.success) {
             toast.success("Logged in automatically");
             navigate("/");
