@@ -99,10 +99,16 @@ const Login = () => {
     }
     
     try {
-      const { data } = await axios.post("/api/auth/login", {
+      const { data } = await axios.post(
+      `https://todo-fullstack-mern-application-server.onrender.com/api/auth/login`,
+      {
         email: inputs.email,
         password: inputs.password,
-      });
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
       if (data.success) {
         toast.success("Login Successfully");
