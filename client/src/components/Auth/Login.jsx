@@ -99,10 +99,17 @@ const Login = () => {
     }
     
     try {
-      const { data } = await axios.post("/api/auth/login", {
-        email: inputs.email,
-        password: inputs.password,
-      });
+      const { data } = await axios.post(
+  `${import.meta.env.VITE_API_BASE_URL}/api/auth/login`,
+  {
+    email: inputs.email,
+    password: inputs.password,
+  },
+  {
+    withCredentials: true,
+  }
+);
+
       if (data.success) {
         toast.success("Login Successfully");
         navigate("/");
